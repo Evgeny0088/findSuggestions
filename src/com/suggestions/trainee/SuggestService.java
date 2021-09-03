@@ -26,7 +26,7 @@ public class SuggestService {
             Pattern pattern = Pattern.compile(input_refined + ".*");
             return CompanyNames.stream().filter(company->{
                 String companyNameStripped = company.replaceAll(regex,"");
-                int last_index = Math.min(input.length(), companyNameStripped.length());
+                int last_index = Math.min(input_refined.length(), companyNameStripped.length());
                 Matcher matcher = pattern.matcher(companyNameStripped.toLowerCase().substring(0,last_index));
                 return matcher.find();}).collect(Collectors.toSet());
         }catch (PatternSyntaxException e){
