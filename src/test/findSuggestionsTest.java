@@ -6,11 +6,9 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import java.util.Arrays;
-import java.util.Collection;
+
+import java.util.*;
 import java.text.ParseException;
-import java.util.Collections;
-import java.util.Set;
 
 @RunWith(Parameterized.class)
 public class findSuggestionsTest {
@@ -21,7 +19,7 @@ public class findSuggestionsTest {
     public Set<String> expected;
 
     @Parameterized.Parameters
-    public static Collection<Object[]> data(){
+    public static List<Object[]> data(){
         Object[][] data = {
                 {"  ", Collections.emptySet()},
                 {"fsjkfsk", Collections.emptySet()},
@@ -45,8 +43,9 @@ public class findSuggestionsTest {
     @Test
     public void suggestTest() throws ParseException {
         SuggestService suggestService = new SuggestService(CompanyNames.getCompanies());
-        System.out.print("results: ");
+        System.out.println("results: ");
         Set<String> companiesTest = suggestService.suggest(input);
+        companiesTest.forEach(System.out::println);
         Assertions.assertEquals(expected,companiesTest);
     }
 }
